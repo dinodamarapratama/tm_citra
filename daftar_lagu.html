@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css">
+<script src="js/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" href="css/jqm-demos.css">	
+   <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+       
+        }
+        
+        // Audio player
+        //
+          var my_media = null;
+        var mediaTimer = null;
+
+      
+        // Play audio
+        //
+        function playAudio(src) {
+		stopAudio();
+            // Create Media object from src
+            my_media = new Media(src, onSuccess, onError);
+
+            // Play audio
+            my_media.play();
+
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                    // get my_media position
+                    my_media.getCurrentPosition(
+                        // success callback
+                        function(position) {
+                            if (position > -1) {
+                                setAudioPosition((position) + " sec");
+                            }
+                        },
+                        // error callback
+                        function(e) {
+                            console.log("Error getting pos=" + e);
+                            setAudioPosition("Error: " + e);
+                        }
+                    );
+                }, 1000);
+            }
+        }
+
+        // Pause audio
+        // 
+        function pauseAudio() {
+            if (my_media) {
+                my_media.pause();
+            }
+        }
+
+        // Stop audio
+        // 
+        function stopAudio() {
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
+
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback 
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' + 
+                  'message: ' + error.message + '\n');
+        }
+
+        // Set audio position
+        // 
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+
+        
+
+
+        </script>
+
+
+</head>
+ <body class="ui-mobile-viewport ui-overlay-a">
+    <div data-role="page" id="home" class="jqm-demos jqm-home" style="background-image:url('images/bg.png'); background-attachment: fixed; background-size: cover;"  >																																																						
+	 <div data-role="header"  >
+     <p style="white-space: normal;color:#fff;font-size:12px;font-weight:50px;margin: 0 5em 0 5em;text-align: center;"  role="heading" class="ui-title">Kebudayaan <br>Jawa Timur</p>	    
+	   
+	  <a  href="daftar_kesenian.html" data-icon="back" data-ajax="false" data-iconpos="notext">Search</a>
+	 </div>  
+     <div role="main"  align="center"  >
+	 <h3 id="nama">Lagu - Lagu Daerah </h3>   
+	 <br>
+     <img  src="images/icon_l1.png" id="pic" width="50%"   alt=""/>
+     <br>
+	 
+     <div data-role="collapsible-set">
+        <div data-role="collapsible" data-collapsed="true">
+        <h3>Cublak Cublak Suweng</h3>     
+
+	  <p style="text-align:center;font-size:16px;font-weight:bold" id="keterangan">Cublak Cublak Suweng</p>
+	  <p>Cublak cublak suweng<br>
+  Suwenge ting gelèntèr<br>
+  Mambu ketundhung gudèl<br>
+  Pak empong lera-léré<br>
+  Sapa ngguyu ndelikkaké<br>
+  Sir sir pong dhelé kopong<br>
+  Sir sir pong dhelé kopong</p>
+  
+  <br><a class="ui-btn ui-btn-b ui-icon-carat-r ui-btn-icon-left" onclick="playAudio('/android_asset/www/audio/lagu-1.mp3');">Play</a><br>
+	  
+      </div>
+      <div data-role="collapsible" data-collapsed="true">
+        <h3>Gundul Gundul Pacul</h3>  
+	  <p style="text-align:center;font-size:16px;font-weight:bold" id="keterangan">Gundul Gundul Pacul</p>
+<p>Gundul gundul pacul cul  gembelengan</p>
+
+<p>Nyunggi nyunggi wakul  kul gembelengan</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bakul glempang segane dadi salatar</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bakul glempang segane dadi salatar</p>
+
+<p>Gundul gundul pacul cul  gembelengan</p>
+
+<p>Nyunggi nyunggi wakul  kul gembelengan</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bakul glempang segane dadi salatar</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bakul glempang segane dadi salatar</p>
+  
+  <br><a class="ui-btn ui-btn-b ui-icon-carat-r ui-btn-icon-left" onclick="playAudio('/android_asset/www/audio/lagu-2.mp3');">Play</a><br>
+	  
+      </div>   
+	  
+	  <div data-role="collapsible" data-collapsed="true">
+        <h3>Rek Ayo Rek</h3>  
+	  <p style="text-align:center;font-size:16px;font-weight:bold" id="keterangan">Rek Ayo Rek</p>
+<p>Rek ayo rek mlaku mlaku nang tunjungan<br>
+  Rek ayo rek rame rame bebarengan<br>
+  Mangan tahu jadhi campur nganggo timun<br>
+  Malam minggu gak apik dhigawa nglamun</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ngalor  ngidur liwat took numpak motor<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Masih untung nyenggal nyenggol  ati lega<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sapa ngerti nasib awak lagi  mujur<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kenal anak e sing dodol rujak  cingur</p>
+
+<p>Ja dhipikir kon padha gak duwe sangu<br>
+  Ja dhipikir angger padha gelem melu aku<br>
+  cah ayo cah sapa gelem melu aku<br>
+  cah ayo cah golek kenalan cah ayu</p>
+  <br><a class="ui-btn ui-btn-b ui-icon-carat-r ui-btn-icon-left" onclick="playAudio('/android_asset/www/audio/lagu-3.mp3');">Play</a><br>
+	  
+      </div>  
+	  
+	   <div data-role="collapsible" data-collapsed="true">
+        <h3>Suwe Ora Jamu</h3>  
+	  <p style="text-align:center;font-size:16px;font-weight:bold" id="keterangan">Suwe Ora Jamu</p>
+<p>Suwe ora jamu<br>
+  Jamu godhong telo<br>
+  Suwe ora ketemu<br>
+  Temu pisan atine gelo</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Suwe  ora jamu<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Jamu sogo thunteng<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Suwe ora ketemu<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Temu pisan atine seneng</p>
+
+<p>Suwe ora jamu<br>
+  amu godhong bunder<br>
+  Suwe ora ketemu<br>
+  Temu pisan tambah pinter</p>
+  <br><a class="ui-btn ui-btn-b ui-icon-carat-r ui-btn-icon-left" onclick="playAudio('/android_asset/www/audio/lagu-4.mp3');">Play</a><br>
+	  
+      </div> 
+	  
+	  	   <div data-role="collapsible" data-collapsed="true">
+        <h3>Walang Kek Kek</h3>  
+	  <p style="text-align:center;font-size:16px;font-weight:bold" id="keterangan">Walang Kek Kek</p>
+<p><span style="line-height: 22.4px;">Walang  kekek, menclok nang tenggok</span><br>
+</p>
+
+<p>  Mabur maneh, menclok nang pari<br>
+  Ojo ngenyek yo mas, karo wong wedho<br>
+  Yen ditinggal lungo, setengah mati</p>
+
+<p>(#) E…  ya ye…, ya ye.. ya<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; E ya.. yae yai, e yaiyo yaiyo</p>
+
+<p>Manuk  sriti kecemplung banyu<br>
+  Bengi ngimpi awan ketemu</p>
+
+<p>Walang  abang menclok neng koro<br>
+  Walang biru.. walange putih<br>
+  Bujang maneh yo mas, ora ngluyuro<br>
+  Sing wis duwe putu, ra tau mulih</p>
+
+<p>(Back to  (#))</p>
+
+<p>Biso nggambang  yo mas, ora biso nyuling<br>
+  Biso nyawang, ora biso nyanding</p>
+
+<p>Walang  ireng, mabur brenggenggeng<br>
+  Walang ireng, dowo suthange<br>
+  Yen podo seneng yo mas, ojo mung mandeng<br>
+  Golek ono ngendi omahe</p>
+
+<p>(Back to  (#))</p>
+
+<p>Biso  nggambang yo mas, ora biso ndemung<br>
+  Biso nyawang, ora wani nembung</p>
+
+<p>Walang  kekek, walange kayu<br>
+  Walang kayu, tibo neng lemah<br>
+  Yen kepingin yo mas, arep melu aku<br>
+  Yen mung trimo, tak kon jogo ngomah</p>
+
+<p>(Back to  (#))</p>
+
+<p>Andeng-andeng,  ono pilingan<br>
+  Ojo dipandeng, mundak kelingan</p>
+
+<p>Walang  kekek menclok neng tampah<br>
+  Mabrur mrene, menclok wit pete<br>
+  Sumengkemo mring Gusti Allah<br>
+  Nindakake dawuh-dawuhe</p>
+
+<p>(Back to  (#))</p>
+
+<p>Walang  kekek menclok neng tali<br>
+  Limang wektu ojo nganti lali</p>
+
+<p>(Back to  (#))</p>
+
+<p>Walang  kekek, walange kadung<br>
+  Walang kekek sampun rampun</p>
+	  
+  <br><a class="ui-btn ui-btn-b ui-icon-carat-r ui-btn-icon-left" onclick="playAudio('/android_asset/www/audio/lagu-5.mp3');">Play</a><br>
+	  
+      </div>
+	  
+    </div> 
+  </div>
+</div>	
+
+
+
+</div>	
+</body>
+</html>

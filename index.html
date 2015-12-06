@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css">
+<script src="js/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" href="css/jqm-demos.css">
+	
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		 <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);     
+        function onDeviceReady() {      
+        } 
+
+	
+	   function exitApp() {
+       navigator.app.exitApp();
+      }
+        </script>
+		 
+		 <script type="text/javascript" charset="utf-8">
+
+        // Wait for Cordova to load
+        //
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Cordova is ready
+        //
+        function onDeviceReady() {
+   
+        }
+
+        // Audio player
+        //
+          var my_media = null;
+        var mediaTimer = null;
+
+      
+        // Play audio
+        //
+        function playAudio(src) {
+            // Create Media object from src
+            my_media = new Media(src, onSuccess, onError);
+
+            // Play audio
+            my_media.play();
+
+            // Update my_media position every second
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                    // get my_media position
+                    my_media.getCurrentPosition(
+                        // success callback
+                        function(position) {
+                            if (position > -1) {
+                                setAudioPosition((position) + " sec");
+                            }
+                        },
+                        // error callback
+                        function(e) {
+                            console.log("Error getting pos=" + e);
+                            setAudioPosition("Error: " + e);
+                        }
+                    );
+                }, 1000);
+            }
+        }
+
+        // Pause audio
+        // 
+        function pauseAudio() {
+            if (my_media) {
+                my_media.pause();
+            }
+        }
+
+        // Stop audio
+        // 
+        function stopAudio() {
+		console.log("stop");
+            if (my_media) {
+                my_media.stop();
+            }
+            clearInterval(mediaTimer);
+            mediaTimer = null;
+        }
+
+        // onSuccess Callback
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Success");
+        }
+
+        // onError Callback 
+        //
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' + 
+                  'message: ' + error.message + '\n');
+        }
+
+        // Set audio position
+        // 
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+        </script>
+
+<style>
+.ui-grid-a img{
+width: 60px;
+height:auto;
+margin:20px;
+}
+
+.ui-grid-a div{
+
+}
+
+.ui-grid-a p{
+width: 100%;
+text-align:center;
+font-size:12px;
+margin-top:-20px;
+}
+</style>
+</head>
+ <body onload="playAudio('/android_asset/www/audio/music.mp3');" class="ui-mobile-viewport ui-overlay-a">
+    <div data-role="page" id="home" class="jqm-demos jqm-home" style="background-image:url('images/bg.png'); background-attachment: fixed; background-size: cover;"  >																																																						
+	 <div data-role="header"  >
+     <p style="white-space: normal;color:#fff;font-size:12px;font-weight:50px;margin: 0 5em 0 5em;text-align: center;"  role="heading" class="ui-title">Kebudayaan <br>Jawa Timur</p>	    
+	  
+     </div>  
+     <div role="main" data-theme="c"  class="ui-content" align="center"  >		 
+    
+	 <div class="ui-grid-a">
+	    <div class="ui-block-a">
+		<img  onclick="window.location.href='daftar_kesenian.html'" src="images/icon1.png"   alt=""/>
+		<p>Kesenian</p>
+	    </div> 
+
+		<div class="ui-block-b">
+		<img onclick="window.location.href='daftar_makanan.html'" src="images/icon2.png"   alt=""/>
+		<p>Makanan</p>
+	    </div>
+		<div class="ui-block-a">
+		<img  onclick="window.location.href='rumahadat.html'" src="images/icon3.png"   alt=""/>
+		<p>Rumah Adat</p>
+	    </div> 
+
+		<div class="ui-block-b">
+		<img onclick="window.location.href='senjata.html'" src="images/icon4.png"   alt=""/>
+		<p>Senjata</p>
+	    </div>
+		<div class="ui-block-a">
+		<img  onclick="window.location.href='tentang.html'" src="images/icon5.png"   alt=""/>
+		<p>Tentang</p>
+	    </div> 
+
+		<div class="ui-block-b">
+		<a  href="#popupDialog" data-rel="popup" data-transition="pop"><img onclick="'" src="images/icon6.svg"   alt=""/></a>
+		<p>Keluar</p>
+	    </div>
+		
+		
+
+
+		
+	</div>
+	 
+</div>	
+<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+    <h1>Keluar</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">Aplikasi Kebudayaan Jawa Timur</h3>
+        <p>Keluar Aplikasi ?</p>
+		<a href="#" onclick="exitApp();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >Ya</a>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+       
+    </div>
+</div>
+
+
+</div>	
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css">
+<script src="js/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="js/jquery.mobile-1.4.2.min.js"></script>
+<link rel="stylesheet" href="css/jqm-demos.css">	
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);     
+        function onDeviceReady() {      
+        } 
+function doClose() {
+		navigator.notification.confirm(
+			'Keluar dari Aplikasi ?',
+			exitApp,
+			'Wisata Ciamis',
+			'Ok,Cancel'
+		);
+	}	
+	function exitApp(buttonIndex) {
+			if (buttonIndex == 1) {
+			navigator.app.exitApp();
+			}
+		else {
+			window.close();
+		}
+	}
+</script>
+		 
+	
+
+
+</head>
+ <body class="ui-mobile-viewport ui-overlay-a">
+    <div data-role="page" id="home" class="jqm-demos jqm-home" style="background-image:url('images/bg.png'); background-attachment: fixed; background-size: cover;"  >																																																						
+	 <div data-role="header"  >
+     <p style="white-space: normal;color:#fff;font-size:12px;font-weight:50px;margin: 0 5em 0 5em;text-align: center;"  role="heading" class="ui-title">Kebudayaan <br>Jawa Timur</p>	    
+	  <a  href="index.html" data-icon="back" data-ajax="false" data-iconpos="notext">Search</a>
+	  
+	 </div>  
+     <div role="main"  align="center"  >		 
+     <ul data-role="listview" data-inset="false" data-theme="b"  data-inset="true">
+     <li><a data-ajax="false" href="daftar_lagu.html" >
+     <img src="images/icon_l1.png"   alt=""/>
+     <h3> Lagu </h3>
+
+     </a>
+     </li>
+	 <li><a href="ludruk.html" data-ajax="false" >
+     <img src="images/icon_l2.png"   alt=""/>
+	 <h3> Ludruk </h3>
+     </a>
+     </li>
+	 <li><a href="daftar_tarian.html" data-ajax="false" >
+     <img src="images/icon_l3.png"   alt=""/>
+     <h3> Tarian </h3>
+	
+     </a>
+     </li>
+	 <li><a href="keterangan_2.html?id=3" data-ajax="false" >
+     <img src="images/icon_l4.png"   alt=""/>
+    <h3>  Wayang </h3>
+	 
+     </a> </li>
+	
+	 
+	 </ul>
+	
+	 
+</div>	
+
+
+
+</div>	
+</body>
+</html>
